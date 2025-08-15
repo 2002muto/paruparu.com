@@ -10,6 +10,7 @@ export default function PageWrapper({
   children: React.ReactNode;
 }) {
   const [status, setStatus] = useState("loading");
+  const [showSplash, setShowSplash] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
 
@@ -25,19 +26,36 @@ export default function PageWrapper({
     return () => clearTimeout(timer);
   }, []);
 
-  // スプラッシュスクリーンのフェードアウトと同時にTOPページのフェードイン開始
+  // ページアクセスから2秒後にSplashScreenを表示開始
   useEffect(() => {
-    const contentTimer = setTimeout(() => {
-      setShowContent(true);
-      setFadeIn(true);
-    }, 2500); // スプラッシュスクリーンフェードアウト開始と同時
+    const splashTimer = setTimeout(() => {
+      setShowSplash(true);
+    }, 750); // ページアクセスから2秒後
 
-    return () => clearTimeout(contentTimer);
+    return () => clearTimeout(splashTimer);
   }, []);
 
+  // SplashScreen表示開始後、6.5秒でメインコンテンツをフェードイン
+  useEffect(() => {
+    if (showSplash) {
+      const contentTimer = setTimeout(() => {
+        setShowContent(true);
+        setFadeIn(true);
+      }, 3500); // SplashScreen表示開始から6.5秒後（SplashScreenの4.5秒 + 2秒）
+
+      return () => clearTimeout(contentTimer);
+    }
+  }, [showSplash]);
+
   return (
-    <div>
-      {/* TOPページコンテンツを常に表示（背景として） */}
+    <div
+      className="min-h-screen"
+      style={{
+        background:
+          "linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+      }}
+    >
+      {/* メインコンテンツ */}
       <motion.div
         className="relative z-30"
         initial={{ opacity: 0 }}
@@ -47,9 +65,9 @@ export default function PageWrapper({
         {children}
       </motion.div>
 
-      {/* スプラッシュスクリーンを重ねて表示 */}
+      {/* スプラッシュスクリーン */}
       <AnimatePresence>
-        {status === "loading" && (
+        {showSplash && status === "loading" && (
           <SplashScreen onComplete={handleSplashComplete} />
         )}
       </AnimatePresence>
