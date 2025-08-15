@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import FireworksEffect from "@/components/FireworksEffect";
 
 interface SplashScreenProps {
   onComplete?: () => void;
@@ -15,13 +16,15 @@ export default function SplashScreen({
   const text = "PARUPARU.COM";
   const characters = Array.from(text);
   const [fadeOut, setFadeOut] = useState(false);
+  const [fireworksActive, setFireworksActive] = useState(true);
+  const [showSpecialFirework, setShowSpecialFirework] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.15, // 0.08から0.15に変更（よりゆっくり）
       },
     },
     exit: {
@@ -45,7 +48,7 @@ export default function SplashScreen({
       rotate: 0,
       scale: 1,
       transition: {
-        duration: 1.2,
+        duration: 2.0, // 1.2から2.0に変更（よりゆっくり）
         ease: "easeOut" as const,
       },
     },
@@ -79,11 +82,21 @@ export default function SplashScreen({
     return `${baseShadows[index % baseShadows.length]}`;
   };
 
+  // 文字アニメーション完了後に花火を停止し、特別な花火を表示
+  useEffect(() => {
+    const fireworksTimer = setTimeout(() => {
+      setFireworksActive(false);
+      setShowSpecialFirework(true);
+    }, 2500); // 2.0秒から3.0秒に変更（文字アニメーション完了後）
+
+    return () => clearTimeout(fireworksTimer);
+  }, []);
+
   // 文字アニメーション完了後にフェードアウト開始
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 3500); // 文字アニメーション完了後1秒でフェードアウト開始
+    }, 5000); // 文字アニメーション完了後1秒でフェードアウト開始
 
     return () => clearTimeout(fadeTimer);
   }, []);
@@ -112,6 +125,12 @@ export default function SplashScreen({
       animate={{ opacity: fadeOut ? 0 : 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
+      {/* 花火エフェクト */}
+      <FireworksEffect
+        isActive={fireworksActive}
+        showSpecialFirework={showSpecialFirework}
+      />
+
       <motion.div
         className="flex items-center justify-center h-full overflow-hidden"
         initial={{ opacity: 1 }}
