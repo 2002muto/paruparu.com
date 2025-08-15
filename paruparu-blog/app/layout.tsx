@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Catamaran } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
+import PageWrapper from "@/components/common/PageWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
+const catamaran = Catamaran({ subsets: ["latin"], weight: ["400", "700", "800"] });
 
 export const metadata: Metadata = {
   title: "パルムちゃんブログ",
@@ -18,12 +20,12 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <div className="min-h-screen bg-gray-50">
-          <Header />
-          <main>
-            {children}
-          </main>
-        </div>
+        <PageWrapper>
+          <div className="min-h-screen bg-gray-50">
+            <Header />
+            <main>{children}</main>
+          </div>
+        </PageWrapper>
       </body>
     </html>
   );
