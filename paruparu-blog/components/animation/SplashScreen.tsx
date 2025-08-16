@@ -132,13 +132,13 @@ export default function SplashScreen({
       />
 
       <motion.div
-        className="flex items-center justify-center h-full overflow-hidden"
+        className="flex items-center justify-center h-full overflow-hidden px-4"
         initial={{ opacity: 1 }}
         animate={{ opacity: fadeOut ? 0 : 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-7xl font-bold tracking-wider"
+          className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider whitespace-nowrap"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -158,8 +158,9 @@ export default function SplashScreen({
               style={{
                 display: "inline-block",
                 textShadow: getCharShadow(char, index),
-                transform: `translate(${(index - 5) * 2}px, ${Math.sin(index * 0.5) * 3}px)`,
+                transform: `translate(${(index - 5) * 1}px, ${Math.sin(index * 0.5) * 2}px)`,
               }}
+              className="whitespace-nowrap"
             >
               {char}
             </motion.span>
