@@ -1,17 +1,20 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import TypingText from "../animation/TypingText";
-import AnimatedText from "../animation/AnimatedText";
+import { useState, useEffect, useContext } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedText from '../animation/AnimatedText';
+import { TransitionContext } from '@/contexts/TransitionContext';
 
 const HeroSection = () => {
+  const context = useContext(TransitionContext);
+  const splashCompleted = context?.splashCompleted;
+
   const images = [
-    "/fastview/01.png",
-    "/fastview/02.png",
-    "/fastview/03.png",
-    "/fastview/04.png",
+    '/fastview/01.png',
+    '/fastview/02.png',
+    '/fastview/03.png',
+    '/fastview/04.png',
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -37,7 +40,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
             className="absolute inset-0"
           >
             <Image
@@ -57,18 +60,23 @@ const HeroSection = () => {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{
+              opacity: splashCompleted ? 1 : 0,
+              y: splashCompleted ? 0 : 30,
+            }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-center"
           >
             {/* メインタイトル */}
             <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-wider">
-              <AnimatedText
-                text="パルムの成長日記"
-                className="text-white"
-                delay={1.0}
-                staggerDelay={0.15}
-              />
+              {splashCompleted && (
+                <AnimatedText
+                  text="パルムの成長日記"
+                  className="text-white"
+                  delay={0.8}
+                  staggerDelay={0.12}
+                />
+              )}
             </h1>
           </motion.div>
         </div>

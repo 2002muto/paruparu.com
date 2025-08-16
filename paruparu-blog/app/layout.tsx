@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Catamaran } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import PageWrapper from "@/components/common/PageWrapper";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <PageWrapper>
-          <div className="min-h-screen bg-white">
-            <Header />
-            <main className="pt-16">{children}</main>
-          </div>
-        </PageWrapper>
+        <Providers>
+          <PageWrapper>
+            <div className="min-h-screen bg-white">
+              <Header />
+              <main className="pt-16">{children}</main>
+            </div>
+          </PageWrapper>
+        </Providers>
       </body>
     </html>
   );

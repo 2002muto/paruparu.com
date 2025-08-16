@@ -22,10 +22,10 @@ const AnimatedText = ({
       {letters.map((letter, index) => (
         <motion.span
           key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 50, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{
-            duration: 0.5,
+            duration: 0.8,
             delay: delay + index * staggerDelay,
             ease: "easeOut",
           }}
