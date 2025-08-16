@@ -28,11 +28,11 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
     hidden: { y: '100%' },
     visible: {
       y: '0%',
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.8 },
     },
     exit: {
       y: '-100%',
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.8 },
     },
   };
 
@@ -46,7 +46,7 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
       exit="exit"
     >
       {Array.from({ length: slices }).map((_, i) => (
-        <div
+        <motion.div
           key={i}
           className="relative h-full overflow-hidden"
           style={{ width: `${100 / slices}%` }}
@@ -68,7 +68,7 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
               />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       ))}
     </motion.div>
   );
