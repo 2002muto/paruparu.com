@@ -30,6 +30,57 @@ body {
   box-sizing: border-box;
 }
 
+/* 記事本文のテキスト色 */
+.prose {
+  color: #000000 !important;
+}
+
+.prose p {
+  color: #000000 !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #000000 !important;
+}
+
+.prose strong {
+  color: #000000 !important;
+}
+
+.prose em {
+  color: #000000 !important;
+}
+
+.prose li {
+  color: #000000 !important;
+}
+
+.prose blockquote {
+  color: #000000 !important;
+}
+
+.markdown-content {
+  color: #000000 !important;
+}
+
+.markdown-content p {
+  color: #000000 !important;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  color: #000000 !important;
+}
+
 /* スムーズスクロール */
 html {
   scroll-behavior: smooth;

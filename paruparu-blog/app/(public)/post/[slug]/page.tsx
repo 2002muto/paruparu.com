@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/mdx/posts";
 import { formatDate } from "@/lib/utils/date";
 import { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import PostContent from "@/components/post/PostContent";
 
 interface PostPageProps {
   params: {
@@ -99,38 +99,14 @@ export default function PostPage({ params }: PostPageProps) {
         </ol>
       </nav>
 
-      {/* 記事ヘッダー */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h1>
-        <time dateTime={post.date} className="text-gray-500 text-sm">
-          {formatDate(post.date)}
-        </time>
-      </header>
-
-      {/* 記事画像 */}
-      {post.image && (
-        <div className="mb-8">
-          <div className="relative h-64 md:h-96 w-full">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover rounded-lg"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
-              quality={85}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* 記事本文 */}
-      <article className="prose prose-lg max-w-none">
-        <div
-          className="markdown-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </article>
+      {/* 記事コンテンツ */}
+      <PostContent
+        title={post.title}
+        date={post.date}
+        image={post.image}
+        content={post.content}
+        formattedDate={formatDate(post.date)}
+      />
 
       {/* コメントセクション（後で実装） */}
       <section className="mt-12 pt-8 border-t border-gray-200">
