@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import TypingText from "../animation/TypingText";
+import AnimatedText from "../animation/AnimatedText";
 
 const HeroSection = () => {
   const images = [
@@ -47,6 +49,29 @@ const HeroSection = () => {
             />
           </motion.div>
         </AnimatePresence>
+
+        {/* オーバーレイ */}
+        <div className="absolute inset-0 bg-black/20" />
+
+        {/* タイトルとアニメーション */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-center"
+          >
+            {/* メインタイトル */}
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-wider">
+              <AnimatedText
+                text="パルムの成長日記"
+                className="text-white"
+                delay={1.0}
+                staggerDelay={0.15}
+              />
+            </h1>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
