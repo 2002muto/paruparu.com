@@ -87,7 +87,7 @@ export default function SplashScreen({
     const fireworksTimer = setTimeout(() => {
       setFireworksActive(false);
       setShowSpecialFirework(true);
-    }, 2500); // 2.0秒から3.0秒に変更（文字アニメーション完了後）
+    }, 4000); // 文字アニメーション完了後（0.15秒 × 13文字 + 2.0秒 = 約3.95秒）
 
     return () => clearTimeout(fireworksTimer);
   }, []);
@@ -96,7 +96,7 @@ export default function SplashScreen({
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 5000); // 文字アニメーション完了後1秒でフェードアウト開始
+    }, 7000); // 文字アニメーション完了後1秒でフェードアウト開始
 
     return () => clearTimeout(fadeTimer);
   }, []);
