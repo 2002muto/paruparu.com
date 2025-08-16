@@ -48,13 +48,7 @@ export default function PageWrapper({
   }, [showSplash]);
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background:
-          "linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-      }}
-    >
+    <div className="min-h-screen">
       {/* メインコンテンツ */}
       <motion.div
         className="relative z-30"

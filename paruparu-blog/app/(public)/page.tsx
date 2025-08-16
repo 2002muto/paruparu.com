@@ -1,11 +1,14 @@
 import { getAllPosts } from "@/lib/mdx/posts";
 import PostCard from "@/components/post/PostCard";
+import HeroSection from "@/components/common/HeroSection";
 
 export default function HomePage() {
   const posts = getAllPosts();
 
   return (
     <div>
+      {/* ファーストビュー */}
+      <HeroSection />
       {/* 記事一覧セクション */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* 記事一覧 */}

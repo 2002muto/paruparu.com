@@ -5,7 +5,6 @@ import Header from "@/components/common/Header";
 import PageWrapper from "@/components/common/PageWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
-const catamaran = Catamaran({ subsets: ["latin"], weight: ["400", "700", "800"] });
 
 export const metadata: Metadata = {
   title: "パルムちゃんブログ",
@@ -21,7 +20,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         <PageWrapper>
-          <div className="min-h-screen bg-gray-50">
+          <div className="min-h-screen bg-white">
             <Header />
             <main>{children}</main>
           </div>
