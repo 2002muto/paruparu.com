@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useContext } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedText from '../animation/AnimatedText';
 import { TransitionContext } from '@/contexts/TransitionContext';
+import SlicedImage from './SlicedImage';
 
 const HeroSection = () => {
   const context = useContext(TransitionContext);
@@ -35,22 +35,11 @@ const HeroSection = () => {
       {/* ファーストビュー画像 */}
       <div className="relative w-full h-[80vh]">
         <AnimatePresence>
-          <motion.div
+          <SlicedImage
             key={currentImageIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={images[currentImageIndex]}
-              alt={`ファーストビュー ${currentImageIndex + 1}`}
-              fill
-              className="object-cover"
-              priority={currentImageIndex === 0}
-            />
-          </motion.div>
+            src={images[currentImageIndex]}
+            alt={`ファーストビュー ${currentImageIndex + 1}`}
+          />
         </AnimatePresence>
 
         {/* オーバーレイ */}
