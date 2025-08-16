@@ -42,14 +42,7 @@ export default function PageWrapper({
   return (
     <div className="min-h-screen">
       {/* メインコンテンツ */}
-      <motion.div
-        className="relative z-30"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: splashCompleted ? 1 : 0 }}
-        transition={{ duration: 1, ease: "easeIn" }}
-      >
-        {children}
-      </motion.div>
+      <div className="relative z-30">{children}</div>
 
       {/* スプラッシュスクリーン - 初回訪問時のみ表示 */}
       <AnimatePresence>

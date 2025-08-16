@@ -37,11 +37,17 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
   // クライアントサイドでのみローカルストレージを確認
   useEffect(() => {
     setIsClient(true);
-    
+
     // リロード時かどうかを判定
-    const isReload = performance.navigation.type === 1 || 
-                    (window.performance && window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type === 'reload';
-    
+    const isReload =
+      performance.navigation.type === 1 ||
+      (
+        window.performance &&
+        (window.performance.getEntriesByType(
+          "navigation"
+        )[0] as PerformanceNavigationTiming)
+      )?.type === "reload";
+
     if (isReload) {
       // リロード時はスプラッシュスクリーンを表示
       setSplashCompleted(false);
@@ -61,7 +67,7 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
     const newValue =
       typeof value === "function" ? value(splashCompleted) : value;
     setSplashCompleted(newValue);
-    
+
     // ページ遷移時のみローカルストレージに保存
     if (typeof window !== "undefined" && !isPageTransition) {
       localStorage.setItem("splashCompleted", newValue.toString());
@@ -70,20 +76,21 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
 
   const handlePageTransition = () => {
     setIsPageTransition(true);
-    setSplashCompleted(true);
+    // ページ遷移時はスプラッシュスクリーンを非表示にするが、
+    // メインコンテンツの表示には影響しない
   };
 
-      return (
-      <TransitionContext.Provider
-        value={{
-          originRect,
-          setOriginRect,
-          splashCompleted,
-          setSplashCompleted: handleSetSplashCompleted,
-          handlePageTransition,
-        }}
-      >
-        {children}
-      </TransitionContext.Provider>
-    );
+  return (
+    <TransitionContext.Provider
+      value={{
+        originRect,
+        setOriginRect,
+        splashCompleted,
+        setSplashCompleted: handleSetSplashCompleted,
+        handlePageTransition,
+      }}
+    >
+      {children}
+    </TransitionContext.Provider>
+  );
 };

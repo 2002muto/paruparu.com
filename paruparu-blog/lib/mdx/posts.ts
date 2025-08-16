@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { Post } from "../types";
+import { mdxToHtml, processContent } from "./mdxToHtml";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -31,11 +32,15 @@ export function getAllPosts(): Post[] {
 }
 
 // 特定の記事を取得
-export function getPostBySlug(slug: string): Post | null {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
+
+    // MDXをHTMLに変換
+    const htmlContent = await mdxToHtml(content);
+    const processedContent = processContent(htmlContent);
 
     return {
       slug,
@@ -43,7 +48,7 @@ export function getPostBySlug(slug: string): Post | null {
       date: data.date,
       image: data.image,
       excerpt: data.excerpt,
-      content,
+      content: processedContent,
     } as Post;
   } catch (error) {
     console.error(`Error reading post ${slug}:`, error);
