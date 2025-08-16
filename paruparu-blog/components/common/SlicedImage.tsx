@@ -15,7 +15,14 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
 
   useEffect(() => {
     const updateSlices = () => {
-      setResponsiveSlices(window.innerWidth < 768 ? 1 : slices);
+      // スマホサイズでも縦の切り替え効果を実装するため、適切なスライス数を設定
+      if (window.innerWidth < 640) {
+        setResponsiveSlices(4); // スマホサイズ：4スライス
+      } else if (window.innerWidth < 768) {
+        setResponsiveSlices(6); // タブレットサイズ：6スライス
+      } else {
+        setResponsiveSlices(slices); // デスクトップサイズ：8スライス
+      }
     };
 
     updateSlices();
@@ -47,22 +54,6 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
       transition: { duration: 0.8 },
     },
   };
-
-  // スマホサイズではスライス効果を無効にして通常の画像表示にする
-  if (responsiveSlices === 1) {
-    return (
-      <motion.div
-        key={src}
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Image src={src} alt={alt} fill className="object-cover" priority />
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
