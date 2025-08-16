@@ -34,13 +34,13 @@ const HeroSection = () => {
     <section className="relative w-full">
       {/* ファーストビュー画像 */}
       <div className="relative w-full h-[80vh]">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: 'easeInOut' }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
             className="absolute inset-0"
           >
             <Image
