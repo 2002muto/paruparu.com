@@ -22,7 +22,7 @@ export default function RootLayout({
         <PageWrapper>
           <div className="min-h-screen bg-white">
             <Header />
-            <main>{children}</main>
+            <main className="pt-16">{children}</main>
           </div>
         </PageWrapper>
       </body>
