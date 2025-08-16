@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import FireworksEffect from "@/components/FireworksEffect";
+import FireworksEffect from "@/components/LazyFireworksEffect";
 
 interface SplashScreenProps {
   onComplete?: () => void;
@@ -138,7 +138,7 @@ export default function SplashScreen({
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider whitespace-nowrap"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider whitespace-nowrap"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

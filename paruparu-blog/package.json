@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.54.0",

@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import AnimatedText from '../animation/AnimatedText';
-import { TransitionContext } from '@/contexts/TransitionContext';
-import SlicedImage from './SlicedImage';
+import { useState, useEffect, useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AnimatedText from "../LazyAnimatedText";
+import { TransitionContext } from "@/contexts/TransitionContext";
+import SlicedImage from "./SlicedImage";
+import Head from "next/head";
 
 const HeroSection = () => {
   const context = useContext(TransitionContext);
   const splashCompleted = context?.splashCompleted;
 
   const images = [
-    '/fastview/01.png',
-    '/fastview/02.png',
-    '/fastview/03.png',
-    '/fastview/04.png',
+    "/fastview/01.png",
+    "/fastview/02.png",
+    "/fastview/03.png",
+    "/fastview/04.png",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -32,6 +33,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full">
+      {/* 画像のプリロード */}
+      <Head>
+        {images.map((image, index) => (
+          <link
+            key={index}
+            rel="preload"
+            as="image"
+            href={image}
+            type="image/png"
+          />
+        ))}
+      </Head>
+
       {/* ファーストビュー画像 */}
       <div className="relative w-full h-[80vh]">
         <AnimatePresence>

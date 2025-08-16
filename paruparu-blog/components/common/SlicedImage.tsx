@@ -87,6 +87,8 @@ const SlicedImage = ({ src, alt, slices = 8 }: SlicedImageProps) => {
                 fill
                 className="object-cover"
                 priority
+                sizes="100vw"
+                quality={85}
               />
             </div>
           </motion.div>

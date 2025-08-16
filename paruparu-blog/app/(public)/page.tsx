@@ -1,6 +1,34 @@
 import { getAllPosts } from "@/lib/mdx/posts";
 import PostCard from "@/components/post/PostCard";
 import HeroSection from "@/components/common/HeroSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ホーム",
+  description:
+    "パルムちゃんの写真とひとことを毎日更新するブログサイト。愛犬パルムの日常をお届けします。",
+  openGraph: {
+    title: "パルムちゃんブログ",
+    description:
+      "パルムちゃんの写真とひとことを毎日更新するブログサイト。愛犬パルムの日常をお届けします。",
+    url: "https://paruparu.com",
+    images: [
+      {
+        url: "/og/home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "パルムちゃんブログ - ホーム",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "パルムちゃんブログ",
+    description:
+      "パルムちゃんの写真とひとことを毎日更新するブログサイト。愛犬パルムの日常をお届けします。",
+    images: ["/og/home.jpg"],
+  },
+};
 
 export default function HomePage() {
   const posts = getAllPosts();

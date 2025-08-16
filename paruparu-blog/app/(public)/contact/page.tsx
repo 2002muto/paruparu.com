@@ -1,18 +1,51 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "お問い合わせ",
+  description:
+    "パルムちゃんブログについてのご質問やご意見がございましたら、お気軽にお問い合わせください。",
+  openGraph: {
+    title: "お問い合わせ | パルムちゃんブログ",
+    description:
+      "パルムちゃんブログについてのご質問やご意見がございましたら、お気軽にお問い合わせください。",
+    url: "https://paruparu.com/contact",
+    images: [
+      {
+        url: "/og/contact.jpg",
+        width: 1200,
+        height: 630,
+        alt: "お問い合わせ - パルムちゃんブログ",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "お問い合わせ | パルムちゃんブログ",
+    description:
+      "パルムちゃんブログについてのご質問やご意見がございましたら、お気軽にお問い合わせください。",
+    images: ["/og/contact.jpg"],
+  },
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          お問い合わせ
-        </h1>
-        
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">お問い合わせ</h1>
+
         <p className="text-gray-600 mb-8">
           パルムちゃんブログについてのご質問やご意見がございましたら、お気軽にお問い合わせください。
         </p>
 
         <form className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               お名前 <span className="text-red-500">*</span>
             </label>
             <input
@@ -25,7 +58,10 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               メールアドレス <span className="text-red-500">*</span>
             </label>
             <input
@@ -38,7 +74,10 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               メッセージ <span className="text-red-500">*</span>
             </label>
             <textarea
